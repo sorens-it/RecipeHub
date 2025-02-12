@@ -1,4 +1,9 @@
+:root{
+    --nav:"Roboto";
+    --logo:"Imperial Script";
+}
 .recipe-nav > ul{
+    text-decoration:none;
     list-style: none;
     padding: 1rem;
     display: flex;
@@ -6,28 +11,44 @@
     font-size: 0.8rem;
 }
 .recipe-nav > ul > h1{
-    list-style: none;
-    padding-left: 10rem;
-    padding-right: 10rem;
+    padding-left: 1vw;
+    padding-right: 1vw;
     margin: 0;
     display: flex;
     justify-content: center;
     font-size: 3rem;
-    font-family: "Imperial Script";
+    font-family: var(--logo);
 }
 .recipe-nav  a{
+    text-decoration:none;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* height: 50px; */
     padding: 0.8em 2em;
+    color:black;
+    transition: font-size 0.3s ease;
+    font-family: var(--nav);
+}
+.recipe-nav a:hover {
+    font-size: 1.2rem;
 }
 .recipe-nav > ul > li{
+    text-decoration:none;
     list-style: none;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 1.5vw;
+    padding-right: 1.5vw;
     margin: 0;
     display: flex;
     justify-content: center;
+}
+.recipe-nav{
+    border-bottom: 2px solid black; 
+}
+/* arrow and new section*/
+.new-recipe{
+    text-decoration:none;
+    list-style: none;
+    color:black;
+    font-family: var(--nav);
 }
