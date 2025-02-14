@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css\RecipeHub.css">
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
   </head>
-  <header>
+  <header class="header">
     <section>
       <nav class="recipe-nav">
         <ul>
@@ -31,7 +31,7 @@
               <span>Gluten Free</span>
             </a>
           </li>
-          <h1>RecipieHub</h1>
+          <h1 class="title">RecipieHub</h1>
           <li>
             <a href="#">
               <span>About</span>
@@ -48,29 +48,34 @@
               </svg>
             </a>
           </li>
-        </ul>
-        <div class="mobile-menu">
-          <a href="#">
-            <span>All Recipies</span>
-          </a>
-          <a href="#">
-            <span>All Recipies</span>
-          </a>
-          <a href="#">
-            <span>All Recipies</span>
-          </a>
-          <a href="#">
-            <span>All Recipies</span>
-          </a>
-          <a href="#">
-            <span>All Recipies</span>
-          </a>
-          <a href="#">
-            <span>All Recipies</span>
-          </a>
-        </div>
+        </ul> 
       </nav>
     </section>
+    <div id="hamburger" onclick="toggleMobileMenu(this)">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+      <ul class="mobile-menu">
+      <a href="#" class="mobile">
+        <span>All Recipies</span>
+      </a>
+      <a href="#">
+        <span>All Recipies</span>
+      </a>
+      <a href="#">
+        <span>All Recipies</span>
+      </a>
+      <a href="#">
+        <span>All Recipies</span>
+      </a>
+      <a href="#">
+        <span>All Recipies</span>
+      </a>
+      <a href="#">
+        <span>All Recipies</span>
+      </a>
+    </ul>
+  </div>
   </header>
   <body>
     <main>
@@ -88,7 +93,13 @@
         </li>
       </ul>
       </section>
+      <div class="images">
+      <img src="img\Cake.jpg">
+      <img src="img\Thing.jpg">
+      <img src="img\Plate.jpg">
+    </div>
     </main>
     <script src="java\RecipeHub.js"></script>
   </body>
+  <footer>Footer Content</footer>
 </html>
