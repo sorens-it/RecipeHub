@@ -1,12 +1,14 @@
 async function main(){
     try {
-        const response = await fetch('java/Recipes.json'); // Fetch the JSON file
-        const recipes = await response.json();
+      const element = document.getElementById('recipeName');
+      const className = element.className; // Returns "myClass"
+      const response = await fetch('java/Recipes.json'); // Fetch the JSON file
+      const recipes = await response.json();
     
         // Example: Accessing and displaying recipe data
-        const recipeName = "Crock Pot Roast"; // Recipe to access
+      const recipeName = className; // Recipe to access
     
-        const foundRecipe = recipes.find(recipe => recipe.name === recipeName);
+      const foundRecipe = recipes.find(recipe => recipe.name === recipeName);
     
         if (foundRecipe) {
           document.getElementById('recipeName').textContent = foundRecipe.name;
