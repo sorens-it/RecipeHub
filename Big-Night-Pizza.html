@@ -3,274 +3,261 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Recipe Hub</title>
+    <title>Big Night Pizza - Recipe Hub</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/RecipeHub.css">
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-      /* Navigation Styles */
-      .header {
-          background: white;
-          padding: 1rem;
-          box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-          position: relative;
-          z-index: 1000;
-      }
+        /* Navigation Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      .recipe-nav {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 20px;
-      }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+        }
 
-      .logo {
-          height: 40px;
-      }
+        .header {
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1000;
+        }
 
-      /* Dropdown Menu Styles */
-      .nav-dropdown {
-          position: relative;
-          display: inline-block;
-          margin-left: auto;
-      }
+        .recipe-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-      .dropbtn {
-          background: none;
-          border: none;
-          padding: 10px 15px;
-          font-family: 'Roboto', sans-serif;
-          font-size: 1rem;
-          cursor: pointer;
-          color: #333;
-      }
+        .logo {
+            height: 60px;
+            width: auto;
+        }
 
-      .dropdown-content {
-          display: none;
-          position: absolute;
-          right: 0;
-          background-color: #f9f9f9;
-          min-width: 160px;
-          box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-          z-index: 1;
-      }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
 
-      .dropdown-content a {
-          color: black;
-          padding: 12px 16px;
-          text-decoration: none;
-          display: block;
-          font-family: 'Roboto', sans-serif;
-      }
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
 
-      .dropdown-content a:hover {
-          background-color: #f1f1f1;
-      }
+        .nav-links a:hover {
+            color: #4CAF50;
+        }
 
-      .nav-dropdown:hover .dropdown-content {
-          display: block;
-      }
+        /* Mobile Menu Styles */
+        #hamburger {
+            display: none;
+            cursor: pointer;
+            padding: 10px;
+        }
 
-      /* Mobile Menu Styles */
-      #hamburger {
-          display: none;
-          cursor: pointer;
-          padding: 10px;
-      }
+        .bar1, .bar2, .bar3 {
+            width: 35px;
+            height: 5px;
+            background-color: #333;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
 
-      .bar1, .bar2, .bar3 {
-          width: 35px;
-          height: 5px;
-          background-color: #333;
-          margin: 6px 0;
-          transition: 0.4s;
-      }
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 1001;
+        }
 
-      .mobile-menu {
-          display: none;
-          position: absolute;
-          top: 100%;
-          right: 0;
-          background-color: #f9f9f9;
-          min-width: 160px;
-          box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-          z-index: 1001;
-      }
+        .mobile-menu a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
 
-      .mobile-menu a {
-          color: black;
-          padding: 12px 16px;
-          text-decoration: none;
-          display: block;
-          font-family: 'Roboto', sans-serif;
-      }
+        /* Hamburger Animation */
+        .change .bar1 {
+            transform: rotate(-45deg) translate(-9px, 6px);
+        }
+        
+        .change .bar2 {
+            opacity: 0;
+        }
+        
+        .change .bar3 {
+            transform: rotate(45deg) translate(-8px, -8px);
+        }
 
-      /* Hamburger Animation */
-      .change .bar1 {
-          transform: rotate(-45deg) translate(-9px, 6px);
-      }
-      
-      .change .bar2 {
-          opacity: 0;
-      }
-      
-      .change .bar3 {
-          transform: rotate(45deg) translate(-8px, -8px);
-      }
+        /* Recipe Styles */
+        .recipe-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
 
-      /* Recipe Grid Styles */
-      .recipe-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 20px;
-          padding: 20px;
-          max-width: 1200px;
-          margin: 0 auto;
-      }
+        .recipe-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
 
-      .recipe-card {
-          background-color: #fff;
-          border-radius: 8px;
-          overflow: hidden;
-          box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-          transition: transform 0.3s ease;
-      }
+        .ingredients-section, .instructions-section {
+            margin-bottom: 2rem;
+        }
 
-      .recipe-card:hover {
-          transform: translateY(-5px);
-      }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+        }
 
-      .recipe-image {
-          width: 100%;
-          height: 200px;
-          object-fit: cover;
-      }
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
 
-      .recipe-title {
-          padding: 15px;
-          text-align: center;
-          font-family: 'Roboto', sans-serif;
-          font-weight: bold;
-          font-size: 18px;
-          color: #333;
-      }
+        ul, ol {
+            padding-left: 1.5rem;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
 
-      /* Newsletter Styles */
-      .newsletter {
-          background-color: #f8f8f8;
-          padding: 40px 20px;
-          text-align: center;
-          margin-top: 30px;
-      }
+        li {
+            margin-bottom: 0.8rem;
+        }
 
-      .newsletter h2 {
-          font-family: 'Roboto', sans-serif;
-          color: #333;
-          margin-bottom: 20px;
-      }
+        .timer {
+            color: #7f8c8d;
+            margin-left: 0.5rem;
+            font-size: 0.9rem;
+        }
 
-      .newsletter p {
-          font-family: 'Roboto', sans-serif;
-          color: #666;
-          margin-bottom: 30px;
-          max-width: 600px;
-          margin-left: auto;
-          margin-right: auto;
-      }
+        /* Newsletter Styles */
+        .newsletter {
+            background-color: #f8f8f8;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 30px;
+        }
 
-      .newsletter-form {
-          display: flex;
-          flex-direction: column;
-          max-width: 400px;
-          margin: 0 auto;
-      }
+        .newsletter h2 {
+            color: #333;
+            margin-bottom: 20px;
+            border: none;
+        }
 
-      .form-group {
-          margin-bottom: 15px;
-          text-align: left;
-      }
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: 0 auto;
+        }
 
-      .newsletter-form label {
-          display: block;
-          margin-bottom: 5px;
-          font-family: 'Roboto', sans-serif;
-          color: #333;
-          font-weight: 500;
-      }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
 
-      .newsletter-form input {
-          width: 100%;
-          padding: 10px;
-          border: 1px solid #ddd;
-          border-radius: 4px;
-          font-family: 'Roboto', sans-serif;
-      }
+        .newsletter-form label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
 
-      .newsletter-form button {
-          background-color: #4CAF50;
-          color: white;
-          border: none;
-          padding: 12px 20px;
-          cursor: pointer;
-          border-radius: 4px;
-          font-family: 'Roboto', sans-serif;
-          font-weight: 500;
-          transition: background-color 0.3s;
-      }
+        .newsletter-form input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
 
-      .newsletter-form button:hover {
-          background-color: #45a049;
-      }
+        .newsletter-form button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
 
-      .thank-you-message {
-          display: none;
-          color: #4CAF50;
-          font-family: 'Roboto', sans-serif;
-          margin-top: 20px;
-          font-weight: 500;
-      }
+        .newsletter-form button:hover {
+            background-color: #45a049;
+        }
 
-      /* Mobile Responsive */
-      @media (max-width: 768px) {
-          .nav-dropdown {
-              display: none;
-          }
-          
-          #hamburger {
-              display: block;
-          }
-          
-          .recipe-grid {
-              grid-template-columns: 1fr;
-          }
-      }
-  </style>
+        .thank-you-message {
+            display: none;
+            color: #4CAF50;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            #hamburger {
+                display: block;
+            }
+
+            .recipe-container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="header">
         <nav class="recipe-nav">
-            <img src="img/logo.png" alt="Recipe Hub Logo" class="logo" style="max-width: 200px;">
+            <img src="img/logo.png" alt="Recipe Hub Logo" class="logo">
             
-            <!-- Desktop Navigation -->
-            <div class="nav-dropdown">
-                <button class="dropbtn">Menu ▼</button>
-                <div class="dropdown-content">
-                    <a href="index.html">All Recipes</a>
-                    <a href="#">Vegan</a>
-                    <a href="#">Gluten Free</a>
-                    <a href="#">About</a>
-                    <a href="#">Shop</a>
-                    <a href="#">Baking Mixes</a>
-                </div>
-            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">All Recipes</a></li>
+                <li><a href="#">Vegan</a></li>
+                <li><a href="#">Gluten Free</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Shop</a></li>
+                <li><a href="#">Baking Mixes</a></li>
+            </ul>
 
-            <!-- Mobile Navigation -->
             <div id="hamburger" onclick="toggleMobileMenu()">
                 <div class="bar1"></div>
                 <div class="bar2"></div>
@@ -288,9 +275,38 @@
     </header>
 
     <main>
-        <div class="recipe-grid" id="recipeList"></div>
+        <div class="recipe-container">
+            <h1>Big Night Pizza</h1>
+            <img class="recipe-image" src="http://upload.wikimedia.org/wikipedia/commons/c/c7/Spinach_pizza.jpg" alt="Big Night Pizza">
+            
+            <div class="ingredients-section">
+                <h2>Ingredients</h2>
+                <ul>
+                    <li>5 teaspoons yeast</li>
+                    <li>5 cups flour</li>
+                    <li>4 tablespoons vegetable oil</li>
+                    <li>2 tablespoons sugar</li>
+                    <li>2 teaspoons salt</li>
+                    <li>2 cups hot water</li>
+                    <li>1/4 cup pizza sauce</li>
+                    <li>3/4 cup mozzarella cheese</li>
+                </ul>
+            </div>
+            
+            <div class="instructions-section">
+                <h2>Instructions</h2>
+                <ol>
+                    <li>Add hot water to yeast in a large bowl and let sit for 15 minutes<span class="timer">(15 minutes)</span></li>
+                    <li>Mix in oil, sugar, salt, and flour and let sit for 1 hour<span class="timer">(60 minutes)</span></li>
+                    <li>Knead the dough and spread onto a pan</li>
+                    <li>Spread pizza sauce and sprinkle cheese</li>
+                    <li>Add any optional toppings as you wish</li>
+                    <li>Bake at 400°F for 15 minutes<span class="timer">(15 minutes)</span></li>
+                    <li>Enjoy!</li>
+                </ol>
+            </div>
+        </div>
 
-        <!-- Newsletter Section -->
         <section class="newsletter">
             <h2>Subscribe to Our Newsletter</h2>
             <p>Get the latest recipes and cooking tips delivered straight to your inbox!</p>
@@ -315,7 +331,9 @@
         </section>
     </main>
 
-    <footer>Footer Content</footer>
+    <footer style="text-align: center; padding: 20px; color: #666;">
+        © 2023 Recipe Hub. All rights reserved.
+    </footer>
 
     <script>
         // Mobile Menu Toggle
@@ -326,53 +344,6 @@
             hamburger.classList.toggle('change');
         }
 
-        // Recipe Loading Script
-        async function loadRecipe() {
-            try {
-                const response = await fetch('java/Recipes.json');
-                const recipes = await response.json();
-                const recipeContainer = document.getElementById('recipeContainer');
-                
-                // Find the specific recipe
-                const recipe = recipes.find(r => r.name === "Big Night Pizza");
-                
-                if (recipe && recipeContainer) {
-                    recipeContainer.innerHTML = `
-                        <h1>${recipe.name}</h1>
-                        <img class="recipe-image" src="${recipe.imageURL}" alt="${recipe.name}">
-                        
-                        <h2>Ingredients</h2>
-                        <ul class="ingredients-list">
-                            ${recipe.ingredients.map(i => `
-                                <li>${i.quantity} ${i.name}</li>
-                            `).join('')}
-                        </ul>
-                        
-                        <h2>Instructions</h2>
-                        <ol class="steps-list">
-                            ${recipe.steps.map(s => `
-                                <li>${s}</li>
-                            `).join('')}
-                        </ol>
-                        
-                        ${recipe.originalURL ? `
-                            <h2>Original Recipe</h2>
-                            <a href="${recipe.originalURL}" target="_blank">View original recipe</a>
-                        ` : ''}
-                    `;
-                } else {
-                    recipeContainer.innerHTML = "<p>Recipe not found</p>";
-                }
-            } catch (error) {
-                console.error('Error loading recipe:', error);
-                if (recipeContainer) {
-                    recipeContainer.innerHTML = "Error loading recipe data.";
-                }
-            }
-        }
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', loadRecipe);
         // Newsletter Handling
         document.getElementById('newsletterForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -397,9 +368,6 @@
                 document.getElementById('thankYouMessage').style.display = 'none';
             }, 3000);
         });
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', loadRecipes);
     </script>
 </body>
 </html>
