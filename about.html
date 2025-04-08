@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Recipe Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reuse existing styles from recipe pages */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1000;
+        }
+
+        .recipe-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+        }
+
+        /* About Page Specific Styles */
+        .about-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .about-section {
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            text-align: center;
+        }
+
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-member {
+            text-align: center;
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            object-fit: cover;
+        }
+
+        /* Keep existing mobile styles */
+        @media (max-width: 768px) {
+            .about-container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="recipe-nav">
+            <img src="img/logo.png" alt="Recipe Hub Logo" class="logo" style="width: 200px; height: auto;">
+            
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="recipes.html">Recipes</a>
+                <a href="about.html" class="active">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+            <div class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="recipes.html">Recipes</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <main>
+        <div class="about-container">
+            <h1>About Recipe Hub</h1>
+            
+            <div class="about-section">
+                <h2>Our Story</h2>
+                <p>Founded in 2023, Recipe Hub began as a passion project between friends who loved sharing delicious meals. What started as a simple collection of family recipes has grown into a thriving community of food enthusiasts from around the world.</p>
+            </div>
+
+            <div class="about-section">
+                <h2>Our Mission</h2>
+                <p>We believe good food brings people together. Our mission is to make home cooking accessible, enjoyable, and rewarding for everyone. Whether you're a seasoned chef or just starting out, Recipe Hub offers:</p>
+                <ul>
+                    <li>Tested, reliable recipes</li>
+                    <li>Cooking tips and techniques</li>
+                    <li>Meal planning inspiration</li>
+                    <li>A supportive cooking community</li>
+                </ul>
+            </div>
+
+            <div class="about-section">
+                <h2>Meet the Team</h2>
+                <div class="team-members">
+                    <div class="team-member">
+                        <img src="img/team1.jpg" alt="Head Chef">
+                        <h3>Alex Morgan</h3>
+                        <p>Head Chef & Founder</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="img/team2.jpg" alt="Nutrition Expert">
+                        <h3>Sarah Johnson</h3>
+                        <p>Nutrition Expert</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="img/team3.jpg" alt="Recipe Developer">
+                        <h3>Michael Chen</h3>
+                        <p>Lead Recipe Developer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter">
+            <h2>Join Our Cooking Community</h2>
+            <form id="newsletterForm" class="newsletter-form">
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <button type="submit">Subscribe</button>
+            </form>
+        </section>
+    </main>
+
+    <footer style="text-align: center; padding: 20px; color: #666;">
+        © 2023 Recipe Hub. All rights reserved.
+    </footer>
+
+    <script>
+        // Reuse mobile menu toggle from previous pages
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const hamburger = document.getElementById('hamburger');
+            mobileMenu.style.display = mobileMenu.style.display === 'block' ? 'none' : 'block';
+            hamburger.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
