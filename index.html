@@ -12,6 +12,43 @@
     <link rel="stylesheet" href="css\RecipeHub.css">
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
     <style>
+      /* Recipe Grid Styles */
+      .recipe-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      
+      .recipe-card {
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+      }
+      
+      .recipe-card:hover {
+        transform: translateY(-5px);
+      }
+      
+      .recipe-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+      
+      .recipe-title {
+        padding: 15px;
+        text-align: center;
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+        font-size: 18px;
+        color: #333;
+      }
+      
       /* Dropdown Menu Styles */
       .dropdown {
         position: relative;
@@ -181,6 +218,10 @@
         .recipe-nav.responsive ul {
           display: block;
         }
+        
+        .recipe-grid {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -256,7 +297,62 @@
           </li>
         </ul>
       </section>
-      <div id="recipeList" class="images">
+      
+      <!-- Recipe Grid Section -->
+      <div class="recipe-grid">
+        <!-- Recipe 1 -->
+        <div class="recipe-card">
+          <img src="img/recipe1.jpg" alt="Recipe 1" class="recipe-image">
+          <div class="recipe-title">Spaghetti Carbonara</div>
+        </div>
+        
+        <!-- Recipe 2 -->
+        <div class="recipe-card">
+          <img src="img/recipe2.jpg" alt="Recipe 2" class="recipe-image">
+          <div class="recipe-title">Chicken Curry</div>
+        </div>
+        
+        <!-- Recipe 3 -->
+        <div class="recipe-card">
+          <img src="img/recipe3.jpg" alt="Recipe 3" class="recipe-image">
+          <div class="recipe-title">Vegetable Stir Fry</div>
+        </div>
+        
+        <!-- Recipe 4 -->
+        <div class="recipe-card">
+          <img src="img/recipe4.jpg" alt="Recipe 4" class="recipe-image">
+          <div class="recipe-title">Beef Burger</div>
+        </div>
+        
+        <!-- Recipe 5 -->
+        <div class="recipe-card">
+          <img src="img/recipe5.jpg" alt="Recipe 5" class="recipe-image">
+          <div class="recipe-title">Caesar Salad</div>
+        </div>
+        
+        <!-- Recipe 6 -->
+        <div class="recipe-card">
+          <img src="img/recipe6.jpg" alt="Recipe 6" class="recipe-image">
+          <div class="recipe-title">Chocolate Cake</div>
+        </div>
+        
+        <!-- Recipe 7 -->
+        <div class="recipe-card">
+          <img src="img/recipe7.jpg" alt="Recipe 7" class="recipe-image">
+          <div class="recipe-title">Pancakes</div>
+        </div>
+        
+        <!-- Recipe 8 -->
+        <div class="recipe-card">
+          <img src="img/recipe8.jpg" alt="Recipe 8" class="recipe-image">
+          <div class="recipe-title">Sushi Rolls</div>
+        </div>
+        
+        <!-- Recipe 9 -->
+        <div class="recipe-card">
+          <img src="img/recipe9.jpg" alt="Recipe 9" class="recipe-image">
+          <div class="recipe-title">Margherita Pizza</div>
+        </div>
       </div>
       
       <!-- Newsletter Form Section -->
