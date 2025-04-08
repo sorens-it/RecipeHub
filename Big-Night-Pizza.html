@@ -327,41 +327,52 @@
         }
 
         // Recipe Loading Script
-        async function loadRecipes() {
+        async function loadRecipe() {
             try {
                 const response = await fetch('java/Recipes.json');
                 const recipes = await response.json();
-                const recipeList = document.getElementById('recipeList');
-
-                if (recipeList) {
-                    recipeList.innerHTML = '';
-                    recipes.forEach(recipe => {
-                        const recipeCard = document.createElement('div');
-                        recipeCard.className = 'recipe-card';
-
-                        const link = document.createElement('a');
-                        link.href = `recipe.html?name=${encodeURIComponent(recipe.name)}`;
-
-                        const img = document.createElement('img');
-                        img.className = 'recipe-image';
-                        img.src = recipe.imageURL;
-                        img.alt = recipe.name;
-
-                        const recipeTitle = document.createElement('div');
-                        recipeTitle.className = 'recipe-title';
-                        recipeTitle.textContent = recipe.name;
-
-                        link.appendChild(img);
-                        recipeCard.appendChild(link);
-                        recipeCard.appendChild(recipeTitle);
-                        recipeList.appendChild(recipeCard);
-                    });
+                const recipeContainer = document.getElementById('recipeContainer');
+                
+                // Find the specific recipe
+                const recipe = recipes.find(r => r.name === "Big Night Pizza");
+                
+                if (recipe && recipeContainer) {
+                    recipeContainer.innerHTML = `
+                        <h1>${recipe.name}</h1>
+                        <img class="recipe-image" src="${recipe.imageURL}" alt="${recipe.name}">
+                        
+                        <h2>Ingredients</h2>
+                        <ul class="ingredients-list">
+                            ${recipe.ingredients.map(i => `
+                                <li>${i.quantity} ${i.name}</li>
+                            `).join('')}
+                        </ul>
+                        
+                        <h2>Instructions</h2>
+                        <ol class="steps-list">
+                            ${recipe.steps.map(s => `
+                                <li>${s}</li>
+                            `).join('')}
+                        </ol>
+                        
+                        ${recipe.originalURL ? `
+                            <h2>Original Recipe</h2>
+                            <a href="${recipe.originalURL}" target="_blank">View original recipe</a>
+                        ` : ''}
+                    `;
+                } else {
+                    recipeContainer.innerHTML = "<p>Recipe not found</p>";
                 }
             } catch (error) {
-                console.error('Error loading recipes:', error);
+                console.error('Error loading recipe:', error);
+                if (recipeContainer) {
+                    recipeContainer.innerHTML = "Error loading recipe data.";
+                }
             }
         }
-
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', loadRecipe);
         // Newsletter Handling
         document.getElementById('newsletterForm').addEventListener('submit', function(e) {
             e.preventDefault();
