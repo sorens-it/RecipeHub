@@ -362,47 +362,6 @@
             }
         }
 
-        // Recipe Loading
-        async function loadRecipeImages() {
-            try {
-                const response = await fetch('java/Recipes.json');
-                const recipes = await response.json();
-                const recipeList = document.getElementById('recipeList');
-
-                if (recipeList) {
-                    recipeList.innerHTML = '';
-                    const recipesToDisplay = recipes.slice(0, 9);
-
-                    recipesToDisplay.forEach(recipe => {
-                        const recipeCard = document.createElement('div');
-                        recipeCard.className = 'recipe-card';
-
-                        const link = document.createElement('a');
-                        link.href = recipe.name.replace(/ /g, '-') + '.html';
-
-                        const img = document.createElement('img');
-                        img.className = 'recipe-image';
-                        img.src = recipe.imageURL;
-                        img.alt = recipe.name;
-
-                        const recipeTitle = document.createElement('div');
-                        recipeTitle.className = 'recipe-title';
-                        recipeTitle.textContent = recipe.name;
-
-                        link.appendChild(img);
-                        recipeCard.appendChild(link);
-                        recipeCard.appendChild(recipeTitle);
-                        recipeList.appendChild(recipeCard);
-                    });
-                }
-            } catch (error) {
-                console.error('Error loading recipes:', error);
-                if(document.getElementById('recipeList')) {
-                    document.getElementById('recipeList').textContent = "Error loading recipe data.";
-                }
-            }
-        }
-
         // Newsletter Handling
         document.getElementById('newsletterForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -428,8 +387,6 @@
             }, 3000);
         });
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', loadRecipeImages);
     </script>
 </body>
 </html>
