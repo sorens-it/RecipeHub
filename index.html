@@ -4,13 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Website</title>
+    <title>Recipe Hub</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css\RecipeHub.css">
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <style>
+      /* Newsletter Form Styles */
+      .newsletter {
+        background-color: #f8f8f8;
+        padding: 40px 20px;
+        text-align: center;
+        margin-top: 30px;
+      }
+      
+      .newsletter h2 {
+        font-family: 'Roboto', sans-serif;
+        color: #333;
+        margin-bottom: 20px;
+      }
+      
+      .newsletter p {
+        font-family: 'Roboto', sans-serif;
+        color: #666;
+        margin-bottom: 30px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .newsletter-form {
+        display: flex;
+        flex-direction: column;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+      
+      .form-group {
+        margin-bottom: 15px;
+        text-align: left;
+      }
+      
+      .newsletter-form label {
+        display: block;
+        margin-bottom: 5px;
+        font-family: 'Roboto', sans-serif;
+        color: #333;
+        font-weight: 500;
+      }
+      
+      .newsletter-form input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-family: 'Roboto', sans-serif;
+      }
+      
+      .newsletter-form button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        cursor: pointer;
+        border-radius: 4px;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+        transition: background-color 0.3s;
+      }
+      
+      .newsletter-form button:hover {
+        background-color: #45a049;
+      }
+      
+      .thank-you-message {
+        display: none;
+        color: #4CAF50;
+        font-family: 'Roboto', sans-serif;
+        margin-top: 20px;
+        font-weight: 500;
+      }
+    </style>
   </head>
   <header class="header">
     <section>
@@ -95,9 +171,72 @@
       </section>
       <div id="recipeList" class="images">
     </div>
+    
+    <!-- Newsletter Form Section -->
+    <section class="newsletter">
+      <h2>Subscribe to Our Newsletter</h2>
+      <p>Get the latest recipes and cooking tips delivered straight to your inbox!</p>
+      
+      <form id="newsletterForm" class="newsletter-form">
+        <div class="form-group">
+          <label for="firstName">First Name:</label>
+          <input type="text" id="firstName" name="firstName" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email Address:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        
+        <button type="submit">Subscribe</button>
+      </form>
+      
+      <div id="thankYouMessage" class="thank-you-message">
+        Thank you for subscribing!
+      </div>
+    </section>
+    
     </main>
     <script src="java\RecipeHub.js"></script>
     <script src="java\MobileMenu.js"></script>
+    
+    <script>
+      // Newsletter Form Handling
+      document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form values
+        const firstName = document.getElementById('firstName').value;
+        const email = document.getElementById('email').value;
+        
+        // Create subscriber object
+        const subscriber = {
+          firstName: firstName,
+          email: email,
+          date: new Date().toISOString()
+        };
+        
+        // Get existing subscribers from localStorage or create empty array
+        let subscribers = JSON.parse(localStorage.getItem('newsletterSubscribers')) || [];
+        
+        // Add new subscriber
+        subscribers.push(subscriber);
+        
+        // Save back to localStorage
+        localStorage.setItem('newsletterSubscribers', JSON.stringify(subscribers));
+        
+        // Show thank you message
+        document.getElementById('thankYouMessage').style.display = 'block';
+        
+        // Reset form
+        document.getElementById('newsletterForm').reset();
+        
+        // Hide thank you message after 3 seconds
+        setTimeout(() => {
+          document.getElementById('thankYouMessage').style.display = 'none';
+        }, 3000);
+      });
+    </script>
   </body>
   <footer>Footer Content</footer>
 </html>
