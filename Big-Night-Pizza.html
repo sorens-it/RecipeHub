@@ -1,144 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <!-- Keep the head section unchanged -->
-    <!-- ... (all previous head content remains the same) ... -->
-</head>
-<body>
-    <header class="header">
-        <nav class="recipe-nav">
-            <img src="img/logo.png" alt="Recipe Hub Logo" class="logo" style="max-width: 200px;">
-            
-            <!-- Desktop Navigation -->
-            <div class="nav-dropdown">
-                <button class="dropbtn">Menu ▼</button>
-                <div class="dropdown-content">
-                    <a href="#">All Recipes</a>
-                    <a href="#">About</a>
-                </div>
-            </div>
-
-            <!-- Mobile Navigation -->
-            <div id="hamburger" onclick="toggleMobileMenu()">
-                <div class="bar1"></div>
-                <div class="bar2"></div>
-                <div class="bar3"></div>
-            </div>
-            <div class="mobile-menu" id="mobileMenu">
-                <a href="#">All Recipes</a>
-                <a href="#">About</a>
-            </div>
-        </nav>
-    </header>
-
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css\RecipeHub.css">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <script src="java\RecipeFinder.js"></script>
+  </head>
+  <header class="header">
+    <section>
+      <nav class="recipe-nav">
+        <ul>
+          <li>
+            <a href="index.html">
+              <span>All Recipies</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span>Vegan</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span>Gluten Free</span>
+            </a>
+          </li>
+          <h1 class="title">RecipieHub</h1>
+          <li>
+            <a href="#">
+              <span>About</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span>Shop</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span>Baking Mixes</span>
+              </svg>
+            </a>
+          </li>
+        </ul> 
+      </nav>
+    </section>
+    <div id="hamburger" onclick="toggleMobileMenu(this)">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+      <ul class="mobile-menu">
+      <a href="#" class="mobile">
+        <span>All Recipies</span>
+      </a>
+      <a href="#">
+        <span>All Recipies</span>
+      </a>
+      <a href="#">
+        <span>All Recipies</span>
+      </a>
+      <a href="#">
+        <span>All Recipies</span>
+      </a>
+      <a href="#">
+        <span>All Recipies</span>
+      </a>
+      <a href="#">
+        <span>All Recipies</span>
+      </a>
+    </ul>
+  </div>
+  </header>
+  <body>
     <main>
-        <!-- Recipe Grid Section -->
-        <div class="recipe-grid" id="recipeList"></div>
-
-        <!-- Newsletter Section -->
-        <section class="newsletter">
-            <h2>Subscribe to Our Newsletter</h2>
-            <p>Get the latest recipes and cooking tips delivered straight to your inbox!</p>
-            
-            <form id="newsletterForm" class="newsletter-form">
-                <div class="form-group">
-                    <label for="firstName">First Name:</label>
-                    <input type="text" id="firstName" name="firstName" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Email Address:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                
-                <button type="submit">Subscribe</button>
-            </form>
-            
-            <div id="thankYouMessage" class="thank-you-message">
-                Thank you for subscribing!
-            </div>
-        </section>
+      <section class="new">
+        <ul class="new-recipe">
+        <li></li>
+          <img src="img\logo.png" width="40" height="40" class="flow">
+          <p class="left">Simple Recipies</p>
+        </li>
+        <li class="center">
+          <p>New Recipe</p>
+        </li>
+        <li class="right">
+          <a href="index.html"><span>Show Me More</span></a>
+        </li>
+      </ul>
+      </section>
+      <div class="images">
+        <li><img id="image"><p id="recipeName" class="Big Night Pizza"></p></li>
+        <li id="ingredients"></li>
+      </div>
+      <div class="images" id="steps"></div>
+      <div><a id="originalURL"></a></div>
+    </div>
     </main>
-
-    <footer>Footer Content</footer>
-
-    <script>
-        // Mobile Menu Toggle
-        function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const hamburger = document.getElementById('hamburger');
-            mobileMenu.style.display = mobileMenu.style.display === 'block' ? 'none' : 'block';
-            hamburger.classList.toggle('change');
-        }
-
-        // Recipe Loading Script
-        async function loadRecipeImages() {
-            try {
-                const response = await fetch('java/Recipes.json');
-                const recipes = await response.json();
-                const recipeList = document.getElementById('recipeList');
-
-                if (recipeList) {
-                    recipeList.innerHTML = '';
-                    const recipesToDisplay = recipes.slice(0, 9);
-
-                    recipesToDisplay.forEach(recipe => {
-                        const recipeCard = document.createElement('div');
-                        recipeCard.className = 'recipe-card';
-
-                        const link = document.createElement('a');
-                        link.href = recipe.name.replace(/ /g, '-') + '.html';
-
-                        const img = document.createElement('img');
-                        img.className = 'recipe-image';
-                        img.src = recipe.imageURL;
-                        img.alt = recipe.name;
-
-                        const recipeTitle = document.createElement('div');
-                        recipeTitle.className = 'recipe-title';
-                        recipeTitle.textContent = recipe.name;
-
-                        link.appendChild(img);
-                        recipeCard.appendChild(link);
-                        recipeCard.appendChild(recipeTitle);
-                        recipeList.appendChild(recipeCard);
-                    });
-                }
-            } catch (error) {
-                console.error('Error loading recipes:', error);
-                if(document.getElementById('recipeList')) {
-                    document.getElementById('recipeList').textContent = "Error loading recipe data.";
-                }
-            }
-        }
-
-        // Newsletter Form Handling
-        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const firstName = document.getElementById('firstName').value;
-            const email = document.getElementById('email').value;
-            
-            const subscriber = {
-                firstName: firstName,
-                email: email,
-                date: new Date().toISOString()
-            };
-            
-            let subscribers = JSON.parse(localStorage.getItem('newsletterSubscribers')) || [];
-            subscribers.push(subscriber);
-            localStorage.setItem('newsletterSubscribers', JSON.stringify(subscribers));
-            
-            document.getElementById('thankYouMessage').style.display = 'block';
-            this.reset();
-            
-            setTimeout(() => {
-                document.getElementById('thankYouMessage').style.display = 'none';
-            }, 3000);
-        });
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', loadRecipeImages);
-    </script>
-</body>
+    <script src="java\MobileMenu.js"></script>
+  </body>
+  <footer>Footer Content</footer>
 </html>
