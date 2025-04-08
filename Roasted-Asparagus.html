@@ -1,107 +1,372 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Website</title>
+    <title>Big Night Pizza - Recipe Hub</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css\RecipeHub.css">
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
-    <script src="java\RecipeFinder.js"></script>
-  </head>
-  <header class="header">
-    <section>
-      <nav class="recipe-nav">
-        <ul>
-          <li>
-            <a href="index.html">
-              <span>All Recipies</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span>Vegan</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span>Gluten Free</span>
-            </a>
-          </li>
-          <h1 class="title">RecipieHub</h1>
-          <li>
-            <a href="#">
-              <span>About</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span>Shop</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span>Baking Mixes</span>
-              </svg>
-            </a>
-          </li>
-        </ul> 
-      </nav>
-    </section>
-    <div id="hamburger" onclick="toggleMobileMenu(this)">
-      <div class="bar1"></div>
-      <div class="bar2"></div>
-      <div class="bar3"></div>
-      <ul class="mobile-menu">
-      <a href="#" class="mobile">
-        <span>All Recipies</span>
-      </a>
-      <a href="#">
-        <span>All Recipies</span>
-      </a>
-      <a href="#">
-        <span>All Recipies</span>
-      </a>
-      <a href="#">
-        <span>All Recipies</span>
-      </a>
-      <a href="#">
-        <span>All Recipies</span>
-      </a>
-      <a href="#">
-        <span>All Recipies</span>
-      </a>
-    </ul>
-  </div>
-  </header>
-  <body>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Navigation Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1000;
+        }
+
+        .recipe-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4CAF50;
+        }
+
+        /* Mobile Menu Styles */
+        #hamburger {
+            display: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .bar1, .bar2, .bar3 {
+            width: 35px;
+            height: 5px;
+            background-color: #333;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 1001;
+        }
+
+        .mobile-menu a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* Hamburger Animation */
+        .change .bar1 {
+            transform: rotate(-45deg) translate(-9px, 6px);
+        }
+        
+        .change .bar2 {
+            opacity: 0;
+        }
+        
+        .change .bar3 {
+            transform: rotate(45deg) translate(-8px, -8px);
+        }
+
+        /* Recipe Styles */
+        .recipe-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .recipe-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .ingredients-section, .instructions-section {
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        ul, ol {
+            padding-left: 1.5rem;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        li {
+            margin-bottom: 0.8rem;
+        }
+
+        .timer {
+            color: #7f8c8d;
+            margin-left: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Newsletter Styles */
+        .newsletter {
+            background-color: #f8f8f8;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .newsletter h2 {
+            color: #333;
+            margin-bottom: 20px;
+            border: none;
+        }
+
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .newsletter-form label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .newsletter-form input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .newsletter-form button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background-color: #45a049;
+        }
+
+        .thank-you-message {
+            display: none;
+            color: #4CAF50;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            #hamburger {
+                display: block;
+            }
+
+            .recipe-container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="recipe-nav">
+          <img src="img/logo.png" alt="Recipe Hub Logo" class="logo" style="width: 200px; height: auto;">
+            
+            <!-- Desktop Navigation -->
+            <div class="nav-dropdown">
+                <button class="dropbtn">Menu ▼</button>
+                <div class="dropdown-content">
+                    <a href="#">All Recipes</a>
+                    <a href="#">About</a>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="hamburger" onclick="toggleMobileMenu()">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="#">All Recipes</a>
+                <a href="#">About</a>
+            </div>
+        </nav>
+    </header>
     <main>
-      <section class="new">
-        <ul class="new-recipe">
-        <li></li>
-          <img src="img\logo.png" width="40" height="40" class="flow">
-          <p class="left">Simple Recipies</p>
-        </li>
-        <li class="center">
-          <p>New Recipe</p>
-        </li>
-        <li class="right">
-          <a href="index.html"><span>Show Me More</span></a>
-        </li>
-      </ul>
-      </section>
-      <div class="images">
-        <li><img id="image"><p id="recipeName" class="Roasted Asparagus"></p></li>
-        <li id="ingredients"></li>
+      <div class="recipe-container">
+          <h1>Roasted Asparagus</h1>
+          <img class="recipe-image" src="http://img.sndimg.com/food/image/upload/w_266/v1/img/recipes/50/84/7/picMcSyVd.jpg" alt="Roasted Asparagus">
+          
+          <div class="ingredients-section">
+              <h2>Ingredients</h2>
+              <ul>
+                  <li>1 lb asparagus</li>
+                  <li>1 1/2 tbsp olive oil</li>
+                  <li>1/2 tsp kosher salt</li>
+              </ul>
+          </div>
+          
+          <div class="instructions-section">
+              <h2>Instructions</h2>
+              <ol>
+                  <li>Preheat oven to 425°F (220°C)</li>
+                  <li>Cut off and discard woody ends of asparagus</li>
+                  <li>Peel outer skin from bottom 2-3 inches of spears with vegetable peeler</li>
+                  <li>Place asparagus on foil-lined baking sheet</li>
+                  <li>Drizzle with olive oil and sprinkle with salt</li>
+                  <li>Roll asparagus with hands to coat evenly</li>
+                  <li>Roast for 10-15 minutes until tender<span class="timer">(10-15 minutes)</span></li>
+                  <li>Test tenderness with knife tip</li>
+                  <li>Watch tips to prevent burning</li>
+                  <li>Serve plain or with light vinaigrette</li>
+              </ol>
+          </div>
+  
+          <div class="original-recipe">
+              <h3>Original Recipe</h3>
+              <a href="http://www.food.com/recipe/roasted-asparagus-50847" target="_blank">View original recipe on Food.com</a>
+          </div>
       </div>
-      <div class="images" id="steps"></div>
-      <div><a id="originalURL"></a></div>
+
+        <section class="newsletter">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Get the latest recipes and cooking tips delivered straight to your inbox!</p>
+            
+            <form id="newsletterForm" class="newsletter-form">
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <button type="submit">Subscribe</button>
+            </form>
+            
+            <div id="thankYouMessage" class="thank-you-message">
+                Thank you for subscribing!
+            </div>
+        </section>
     </main>
-    <script src="java\MobileMenu.js"></script>
-  </body>
-  <footer>Footer Content</footer>
+
+    <footer style="text-align: center; padding: 20px; color: #666;">
+        © 2023 Recipe Hub. All rights reserved.
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const hamburger = document.getElementById('hamburger');
+            mobileMenu.style.display = mobileMenu.style.display === 'block' ? 'none' : 'block';
+            hamburger.classList.toggle('change');
+        }
+
+        // Newsletter Handling
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value;
+            const email = document.getElementById('email').value;
+            
+            const subscriber = {
+                firstName: firstName,
+                email: email,
+                date: new Date().toISOString()
+            };
+            
+            let subscribers = JSON.parse(localStorage.getItem('newsletterSubscribers')) || [];
+            subscribers.push(subscriber);
+            localStorage.setItem('newsletterSubscribers', JSON.stringify(subscribers));
+            
+            document.getElementById('thankYouMessage').style.display = 'block';
+            this.reset();
+            
+            setTimeout(() => {
+                document.getElementById('thankYouMessage').style.display = 'none';
+            }, 3000);
+        });
+    </script>
+</body>
 </html>
