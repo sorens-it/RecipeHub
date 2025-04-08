@@ -9,258 +9,264 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/RecipeHub.css">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
     <style>
-        /* Navigation Styles */
-        .header {
-            background: white;
-            padding: 1rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: relative;
-            z-index: 1000;
-        }
+      /* Navigation Styles */
+      .header {
+          background: white;
+          padding: 1rem;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+          position: relative;
+          z-index: 1000;
+      }
 
-        .recipe-nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+      .recipe-nav {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
+      }
 
-        .logo {
-            height: 40px;
-        }
+      .logo {
+          height: 40px;
+      }
 
-        /* Dropdown Menu Styles */
-        .nav-dropdown {
-            position: relative;
-            display: inline-block;
-            margin-left: auto;
-        }
+      /* Dropdown Menu Styles */
+      .nav-dropdown {
+          position: relative;
+          display: inline-block;
+          margin-left: auto;
+      }
 
-        .dropbtn {
-            background: none;
-            border: none;
-            padding: 10px 15px;
-            font-family: 'Roboto', sans-serif;
-            font-size: 1rem;
-            cursor: pointer;
-            color: #333;
-        }
+      .dropbtn {
+          background: none;
+          border: none;
+          padding: 10px 15px;
+          font-family: 'Roboto', sans-serif;
+          font-size: 1rem;
+          cursor: pointer;
+          color: #333;
+      }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            z-index: 1;
-        }
+      .dropdown-content {
+          display: none;
+          position: absolute;
+          right: 0;
+          background-color: #f9f9f9;
+          min-width: 160px;
+          box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+          z-index: 1;
+      }
 
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            font-family: 'Roboto', sans-serif;
-        }
+      .dropdown-content a {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+          font-family: 'Roboto', sans-serif;
+      }
 
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
+      .dropdown-content a:hover {
+          background-color: #f1f1f1;
+      }
 
-        .nav-dropdown:hover .dropdown-content {
-            display: block;
-        }
+      .nav-dropdown:hover .dropdown-content {
+          display: block;
+      }
 
-        /* Mobile Menu Styles */
-        #hamburger {
-            display: none;
-            cursor: pointer;
-            padding: 10px;
-        }
+      /* Mobile Menu Styles */
+      #hamburger {
+          display: none;
+          cursor: pointer;
+          padding: 10px;
+      }
 
-        .bar1, .bar2, .bar3 {
-            width: 35px;
-            height: 5px;
-            background-color: #333;
-            margin: 6px 0;
-            transition: 0.4s;
-        }
+      .bar1, .bar2, .bar3 {
+          width: 35px;
+          height: 5px;
+          background-color: #333;
+          margin: 6px 0;
+          transition: 0.4s;
+      }
 
-        .mobile-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            z-index: 1001;
-        }
+      .mobile-menu {
+          display: none;
+          position: absolute;
+          top: 100%;
+          right: 0;
+          background-color: #f9f9f9;
+          min-width: 160px;
+          box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+          z-index: 1001;
+      }
 
-        .mobile-menu a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            font-family: 'Roboto', sans-serif;
-        }
+      .mobile-menu a {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+          font-family: 'Roboto', sans-serif;
+      }
 
-        /* Hamburger Animation */
-        .change .bar1 {
-            transform: rotate(-45deg) translate(-9px, 6px);
-        }
-        
-        .change .bar2 {
-            opacity: 0;
-        }
-        
-        .change .bar3 {
-            transform: rotate(45deg) translate(-8px, -8px);
-        }
+      /* Hamburger Animation */
+      .change .bar1 {
+          transform: rotate(-45deg) translate(-9px, 6px);
+      }
+      
+      .change .bar2 {
+          opacity: 0;
+      }
+      
+      .change .bar3 {
+          transform: rotate(45deg) translate(-8px, -8px);
+      }
 
-        /* Recipe Grid Styles */
-        .recipe-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+      /* Recipe Grid Styles */
+      .recipe-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 20px;
+          padding: 20px;
+          max-width: 1200px;
+          margin: 0 auto;
+      }
 
-        .recipe-card {
-            background-color: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
+      .recipe-card {
+          background-color: #fff;
+          border-radius: 8px;
+          overflow: hidden;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+          transition: transform 0.3s ease;
+      }
 
-        .recipe-card:hover {
-            transform: translateY(-5px);
-        }
+      .recipe-card:hover {
+          transform: translateY(-5px);
+      }
 
-        .recipe-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
+      .recipe-image {
+          width: 100%;
+          height: 200px;
+          object-fit: cover;
+      }
 
-        .recipe-title {
-            padding: 15px;
-            text-align: center;
-            font-family: 'Roboto', sans-serif;
-            font-weight: bold;
-            font-size: 18px;
-            color: #333;
-        }
+      .recipe-title {
+          padding: 15px;
+          text-align: center;
+          font-family: 'Roboto', sans-serif;
+          font-weight: bold;
+          font-size: 18px;
+          color: #333;
+      }
 
-        /* Newsletter Styles */
-        .newsletter {
-            background-color: #f8f8f8;
-            padding: 40px 20px;
-            text-align: center;
-            margin-top: 30px;
-        }
+      /* Newsletter Styles */
+      .newsletter {
+          background-color: #f8f8f8;
+          padding: 40px 20px;
+          text-align: center;
+          margin-top: 30px;
+      }
 
-        .newsletter h2 {
-            font-family: 'Roboto', sans-serif;
-            color: #333;
-            margin-bottom: 20px;
-        }
+      .newsletter h2 {
+          font-family: 'Roboto', sans-serif;
+          color: #333;
+          margin-bottom: 20px;
+      }
 
-        .newsletter p {
-            font-family: 'Roboto', sans-serif;
-            color: #666;
-            margin-bottom: 30px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+      .newsletter p {
+          font-family: 'Roboto', sans-serif;
+          color: #666;
+          margin-bottom: 30px;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+      }
 
-        .newsletter-form {
-            display: flex;
-            flex-direction: column;
-            max-width: 400px;
-            margin: 0 auto;
-        }
+      .newsletter-form {
+          display: flex;
+          flex-direction: column;
+          max-width: 400px;
+          margin: 0 auto;
+      }
 
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
+      .form-group {
+          margin-bottom: 15px;
+          text-align: left;
+      }
 
-        .newsletter-form label {
-            display: block;
-            margin-bottom: 5px;
-            font-family: 'Roboto', sans-serif;
-            color: #333;
-            font-weight: 500;
-        }
+      .newsletter-form label {
+          display: block;
+          margin-bottom: 5px;
+          font-family: 'Roboto', sans-serif;
+          color: #333;
+          font-weight: 500;
+      }
 
-        .newsletter-form input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-family: 'Roboto', sans-serif;
-        }
+      .newsletter-form input {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-family: 'Roboto', sans-serif;
+      }
 
-        .newsletter-form button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            cursor: pointer;
-            border-radius: 4px;
-            font-family: 'Roboto', sans-serif;
-            font-weight: 500;
-            transition: background-color 0.3s;
-        }
+      .newsletter-form button {
+          background-color: #4CAF50;
+          color: white;
+          border: none;
+          padding: 12px 20px;
+          cursor: pointer;
+          border-radius: 4px;
+          font-family: 'Roboto', sans-serif;
+          font-weight: 500;
+          transition: background-color 0.3s;
+      }
 
-        .newsletter-form button:hover {
-            background-color: #45a049;
-        }
+      .newsletter-form button:hover {
+          background-color: #45a049;
+      }
 
-        .thank-you-message {
-            display: none;
-            color: #4CAF50;
-            font-family: 'Roboto', sans-serif;
-            margin-top: 20px;
-            font-weight: 500;
-        }
+      .thank-you-message {
+          display: none;
+          color: #4CAF50;
+          font-family: 'Roboto', sans-serif;
+          margin-top: 20px;
+          font-weight: 500;
+      }
 
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .nav-dropdown {
-                display: none;
-            }
-            
-            #hamburger {
-                display: block;
-            }
-            
-            .recipe-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+          .nav-dropdown {
+              display: none;
+          }
+          
+          #hamburger {
+              display: block;
+          }
+          
+          .recipe-grid {
+              grid-template-columns: 1fr;
+          }
+      }
+  </style>
 </head>
 <body>
     <header class="header">
         <nav class="recipe-nav">
-          <img src="img/logo.png" alt="Recipe Hub Logo" class="logo" style="width: 180px; height: auto;">
+            <img src="img/logo.png" alt="Recipe Hub Logo" class="logo" style="max-width: 200px;">
             
             <!-- Desktop Navigation -->
             <div class="nav-dropdown">
                 <button class="dropbtn">Menu ▼</button>
                 <div class="dropdown-content">
-                    <a href="#">All Recipes</a>
+                    <a href="index.html">All Recipes</a>
+                    <a href="#">Vegan</a>
+                    <a href="#">Gluten Free</a>
                     <a href="#">About</a>
+                    <a href="#">Shop</a>
+                    <a href="#">Baking Mixes</a>
                 </div>
             </div>
 
@@ -271,35 +277,118 @@
                 <div class="bar3"></div>
             </div>
             <div class="mobile-menu" id="mobileMenu">
-                <a href="#">All Recipes</a>
+                <a href="index.html">All Recipes</a>
+                <a href="#">Vegan</a>
+                <a href="#">Gluten Free</a>
                 <a href="#">About</a>
+                <a href="#">Shop</a>
+                <a href="#">Baking Mixes</a>
             </div>
         </nav>
     </header>
+
     <main>
-      <section class="new">
-        <ul class="new-recipe">
-        <li></li>
-          <img src="img\logo.png" width="40" height="40" class="flow">
-          <p class="left">Simple Recipies</p>
-        </li>
-        <li class="center">
-          <p>New Recipe</p>
-        </li>
-        <li class="right">
-          <a href="index.html"><span>Show Me More</span></a>
-        </li>
-      </ul>
-      </section>
-      <div class="images">
-        <li><img id="image"><p id="recipeName" class="Big Night Pizza"></p></li>
-        <li id="ingredients"></li>
-      </div>
-      <div class="images" id="steps"></div>
-      <div><a id="originalURL"></a></div>
-    </div>
+        <div class="recipe-grid" id="recipeList"></div>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Get the latest recipes and cooking tips delivered straight to your inbox!</p>
+            
+            <form id="newsletterForm" class="newsletter-form">
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <button type="submit">Subscribe</button>
+            </form>
+            
+            <div id="thankYouMessage" class="thank-you-message">
+                Thank you for subscribing!
+            </div>
+        </section>
     </main>
-    <script src="java\MobileMenu.js"></script>
-  </body>
-  <footer>Footer Content</footer>
+
+    <footer>Footer Content</footer>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const hamburger = document.getElementById('hamburger');
+            mobileMenu.style.display = mobileMenu.style.display === 'block' ? 'none' : 'block';
+            hamburger.classList.toggle('change');
+        }
+
+        // Recipe Loading Script
+        async function loadRecipes() {
+            try {
+                const response = await fetch('java/Recipes.json');
+                const recipes = await response.json();
+                const recipeList = document.getElementById('recipeList');
+
+                if (recipeList) {
+                    recipeList.innerHTML = '';
+                    recipes.forEach(recipe => {
+                        const recipeCard = document.createElement('div');
+                        recipeCard.className = 'recipe-card';
+
+                        const link = document.createElement('a');
+                        link.href = `recipe.html?name=${encodeURIComponent(recipe.name)}`;
+
+                        const img = document.createElement('img');
+                        img.className = 'recipe-image';
+                        img.src = recipe.imageURL;
+                        img.alt = recipe.name;
+
+                        const recipeTitle = document.createElement('div');
+                        recipeTitle.className = 'recipe-title';
+                        recipeTitle.textContent = recipe.name;
+
+                        link.appendChild(img);
+                        recipeCard.appendChild(link);
+                        recipeCard.appendChild(recipeTitle);
+                        recipeList.appendChild(recipeCard);
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading recipes:', error);
+            }
+        }
+
+        // Newsletter Handling
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value;
+            const email = document.getElementById('email').value;
+            
+            const subscriber = {
+                firstName: firstName,
+                email: email,
+                date: new Date().toISOString()
+            };
+            
+            let subscribers = JSON.parse(localStorage.getItem('newsletterSubscribers')) || [];
+            subscribers.push(subscriber);
+            localStorage.setItem('newsletterSubscribers', JSON.stringify(subscribers));
+            
+            document.getElementById('thankYouMessage').style.display = 'block';
+            this.reset();
+            
+            setTimeout(() => {
+                document.getElementById('thankYouMessage').style.display = 'none';
+            }, 3000);
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', loadRecipes);
+    </script>
+</body>
 </html>
