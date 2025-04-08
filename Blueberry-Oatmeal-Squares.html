@@ -1,102 +1,384 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Website</title>
+    <title>Blueberry Oatmeal Squares - Recipe Hub</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css\RecipeHub.css">
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
-    <script src="java\RecipeFinder.js"></script>
-  </head>
-  <header class="header">
-    <section>
-      <nav class="recipe-nav">
-        <ul>
-          <li>
-            <a href="index.html">
-              <span>All Recipies</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span>Vegan</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span>Gluten Free</span>
-            </a>
-          </li>
-          <h1 class="title">RecipieHub</h1>
-          <li>
-            <a href="#">
-              <span>About</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <input type="text" placeholder="Search..">
-            </a>
-          </li>
-        </ul> 
-      </nav>
-    </section>
-    <div id="hamburger" onclick="toggleMobileMenu(this)">
-      <div class="bar1"></div>
-      <div class="bar2"></div>
-      <div class="bar3"></div>
-      <ul class="mobile-menu">
-      <a href="#" class="mobile">
-        <span>All Recipies</span>
-      </a>
-      <a href="#">
-        <span>All Recipies</span>
-      </a>
-      <a href="#">
-        <span>All Recipies</span>
-      </a>
-      <a href="#">
-        <span>All Recipies</span>
-      </a>
-      <a href="#">
-        <span>All Recipies</span>
-      </a>
-      <a href="#">
-        <span>All Recipies</span>
-      </a>
-    </ul>
-  </div>
-  </header>
-  <body>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Navigation Styles */
+        .header {
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1000;
+        }
+
+        .recipe-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            height: 60px;
+        }
+
+        /* Dropdown Menu Styles */
+        .nav-dropdown {
+            position: relative;
+            display: inline-block;
+            margin-left: auto;
+        }
+
+        .dropbtn {
+            background: none;
+            border: none;
+            padding: 10px 15px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .nav-dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Mobile Menu Styles */
+        #hamburger {
+            display: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .bar1, .bar2, .bar3 {
+            width: 35px;
+            height: 5px;
+            background-color: #333;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 1001;
+        }
+
+        .mobile-menu a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /* Hamburger Animation */
+        .change .bar1 {
+            transform: rotate(-45deg) translate(-9px, 6px);
+        }
+        
+        .change .bar2 {
+            opacity: 0;
+        }
+        
+        .change .bar3 {
+            transform: rotate(45deg) translate(-8px, -8px);
+        }
+
+        /* Recipe Grid Styles */
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .recipe-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .recipe-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .recipe-title {
+            padding: 15px;
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+            font-size: 18px;
+            color: #333;
+        }
+
+        /* Newsletter Styles */
+        .newsletter {
+            background-color: #f8f8f8;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .newsletter h2 {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .newsletter p {
+            font-family: 'Roboto', sans-serif;
+            color: #666;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .newsletter-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .newsletter-form input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .newsletter-form button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background-color: #45a049;
+        }
+
+        .thank-you-message {
+            display: none;
+            color: #4CAF50;
+            font-family: 'Roboto', sans-serif;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-dropdown {
+                display: none;
+            }
+            
+            #hamburger {
+                display: block;
+            }
+            
+            .recipe-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="recipe-nav">
+          <img src="img/logo.png" alt="Recipe Hub Logo" class="logo" style="width: 200px; height: auto;">
+            
+            <!-- Desktop Navigation -->
+            <div class="nav-dropdown">
+                <button class="dropbtn">Menu ▼</button>
+                <div class="dropdown-content">
+                    <a href="#">All Recipes</a>
+                    <a href="#">About</a>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="hamburger" onclick="toggleMobileMenu()">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="#">All Recipes</a>
+                <a href="#">About</a>
+            </div>
+        </nav>
+    </header>
+
+
     <main>
-      <section class="new">
-        <ul class="new-recipe">
-        <li></li>
-          <img src="img\logo.png" width="40" height="40" class="flow">
-          <p class="left">Simple Recipies</p>
-        </li>
-        <li class="center">
-          <p>New Recipe</p>
-        </li>
-        <li class="right">
-          <a href="index.html"><span>Show Me More</span></a>
-        </li>
-      </ul>
-      </section>
-      <div class="images">
-        <li><img id="image"><p id="recipeName" class="Blueberry Oatmeal Squares"></p></li>
-        <li id="ingredients"></li>
+      <div class="recipe-container">
+          <h1>Blueberry Oatmeal Squares</h1>
+          <img class="recipe-image" src="https://edsmith.com/wp-content/uploads/2024/09/Blueberry-Oatmeal-Bars-032-500x500-1.jpg" alt="Blueberry Oatmeal Squares">
+          
+          <div class="ingredients-section">
+              <h2>Ingredients</h2>
+              <ul>
+                  <li>2-1/2 cups rolled oats (not instant)</li>
+                  <li>1-1/4 cups all-purpose flour</li>
+                  <li>1 tbsp grated orange rind</li>
+                  <li>1/4 tsp salt</li>
+                  <li>1 cup cold butter, cubed</li>
+                  <li>3/4 cup packed brown sugar</li>
+                  <li>3 cups fresh blueberries</li>
+                  <li>1/2 cup granulated sugar</li>
+                  <li>1/3 cup orange juice</li>
+                  <li>4 tsp cornstarch</li>
+              </ul>
+          </div>
+          
+          <div class="instructions-section">
+              <h2>Instructions</h2>
+              <ol>
+                  <li>Filling: In saucepan, bring blueberries, sugar and orange juice to boil; reduce heat and simmer until tender<span class="timer">(10 minutes)</span></li>
+                  <li>Whisk cornstarch with 2 tbsp water; whisk into blueberries and boil until thickened<span class="timer">(1 minute)</span></li>
+                  <li>Place plastic wrap directly on surface; refrigerate until cooled<span class="timer">(60 minutes)</span></li>
+                  <li>In large bowl, whisk together oats, flour, sugar, orange rind and salt</li>
+                  <li>With pastry blender, cut in butter until coarse crumbs form</li>
+                  <li>Press half into 8-inch square parchment-lined cake pan; spread with blueberry filling</li>
+                  <li>Bake at 350°F until light golden<span class="timer">(45 minutes)</span></li>
+                  <li>Let cool on rack before cutting into squares</li>
+                  <li>(Make-ahead: Refrigerate for up to 2 days or freeze for 2 weeks)</li>
+              </ol>
+          </div>
+          
+          <div class="original-recipe">
+              <h3>Original Recipe</h3>
+              <a href="https://edsmith.com/recipe/blueberry-oatmeal-pie-bars/" target="_blank">View original recipe on EdSmith.com</a>
+          </div>
       </div>
-      <div class="images" id="steps"></div>
-      <div><a id="originalURL"></a></div>
-    </div>
-    </main>
-    <script src="java\MobileMenu.js"></script>
-  </body>
-  <footer>Footer Content</footer>
+
+      <section class="newsletter">
+          <h2>Subscribe to Our Newsletter</h2>
+          <p>Get the latest recipes and cooking tips delivered straight to your inbox!</p>
+          
+          <form id="newsletterForm" class="newsletter-form">
+              <div class="form-group">
+                  <label for="firstName">First Name:</label>
+                  <input type="text" id="firstName" name="firstName" required>
+              </div>
+              
+              <div class="form-group">
+                  <label for="email">Email Address:</label>
+                  <input type="email" id="email" name="email" required>
+              </div>
+              
+              <button type="submit">Subscribe</button>
+          </form>
+          
+          <div id="thankYouMessage" class="thank-you-message">
+              Thank you for subscribing!
+          </div>
+      </section>
+  </main>
+
+  <footer style="text-align: center; padding: 20px; color: #666;">
+      © 2023 Recipe Hub. All rights reserved.
+  </footer>
+
+  <script>
+      // Mobile Menu Toggle
+      function toggleMobileMenu() {
+          const mobileMenu = document.getElementById('mobileMenu');
+          const hamburger = document.getElementById('hamburger');
+          mobileMenu.style.display = mobileMenu.style.display === 'block' ? 'none' : 'block';
+          hamburger.classList.toggle('change');
+      }
+
+      // Newsletter Handling
+      document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const firstName = document.getElementById('firstName').value;
+          const email = document.getElementById('email').value;
+          
+          const subscriber = {
+              firstName: firstName,
+              email: email,
+              date: new Date().toISOString()
+          };
+          
+          let subscribers = JSON.parse(localStorage.getItem('newsletterSubscribers')) || [];
+          subscribers.push(subscriber);
+          localStorage.setItem('newsletterSubscribers', JSON.stringify(subscribers));
+          
+          document.getElementById('thankYouMessage').style.display = 'block';
+          this.reset();
+          
+          setTimeout(() => {
+              document.getElementById('thankYouMessage').style.display = 'none';
+          }, 3000);
+      });
+  </script>
+</body>
 </html>
